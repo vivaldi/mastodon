@@ -16,7 +16,7 @@ const SignInBanner = () => {
 
   if (registrationsOpen) {
     signupButton = (
-      <a href='/auth/sign_up' className='button button--block button-tertiary'>
+      <a href='https://login.vivaldi.net/profile/id/signup' target="_blank" rel="noopener noreferrer" className='button button--block button-tertiary'>
         <FormattedMessage id='sign_in_banner.create_account' defaultMessage='Create account' />
       </a>
     );
@@ -31,7 +31,7 @@ const SignInBanner = () => {
   return (
     <div className='sign-in-banner'>
       <p><FormattedMessage id='sign_in_banner.text' defaultMessage='Sign in to follow profiles or hashtags, favourite, share and reply to posts, or interact from your account on a different server.' /></p>
-      <a href='/auth/sign_in' className='button button--block'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
+      <a href='/auth/auth/openid_connect' rel='nofollow' data-method='post' className='button button--block'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
       {signupButton}
     </div>
   );
