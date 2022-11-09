@@ -4,7 +4,7 @@
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, novalidate: false }) do |f|
   = render 'shared/error_messages', object: resource
 
-  - if !use_seamless_external_login? || resource.encrypted_password.present?
+  - if !omniauth_only? || resource.encrypted_password.present?
     = f.input :reset_password_token, as: :hidden
 
     .fields-group
