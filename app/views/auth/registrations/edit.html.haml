@@ -8,7 +8,7 @@
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'auth_edit', novalidate: false }) do |f|
   = render 'shared/error_messages', object: resource
 
-  - if false
+  - if !omniauth_only? || resource.encrypted_password.present?
     .fields-row
       .fields-row__column.fields-group.fields-row__column-6
         = f.input :email, wrapper: :with_label, input_html: { 'aria-label': t('simple_form.labels.defaults.email') }, required: true, disabled: current_account.suspended?
