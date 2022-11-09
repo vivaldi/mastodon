@@ -37,6 +37,20 @@ module User::Omniauthable
         identity.save!
       end
 
+      # Update the email if it has been updated in the openid provider
+      if user.email != auth.info.email
+        user.email = auth.info.email
+        user.save!
+        user.update!(email: user.email)
+        user.confirm
+      end
+
+      # Update the avatar if it has been updated in the openid provider
+      if user.account.avatar_remote_url != auth.info.image
+        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
+        user.save!
+      end
+
       user
     end
 
