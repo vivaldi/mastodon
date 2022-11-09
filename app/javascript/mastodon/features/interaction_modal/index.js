@@ -122,7 +122,7 @@ class InteractionModal extends React.PureComponent {
 
     if (registrationsOpen) {
       signupButton = (
-        <a href='/auth/sign_up' className='button button--block button-tertiary'>
+        <a href='https://login.vivaldi.net/profile/id/signup' target='_blank' rel='noopener noreferrer' className='button button--block button-tertiary'>
           <FormattedMessage id='sign_in_banner.create_account' defaultMessage='Create account' />
         </a>
       );
@@ -144,7 +144,7 @@ class InteractionModal extends React.PureComponent {
         <div className='interaction-modal__choices'>
           <div className='interaction-modal__choices__choice'>
             <h3><FormattedMessage id='interaction_modal.on_this_server' defaultMessage='On this server' /></h3>
-            <a href='/auth/sign_in' className='button button--block'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
+            <a href='/auth/auth/openid_connect' rel='nofollow' data-method='post' className='button button--block'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
             {signupButton}
           </div>
 
