@@ -2,18 +2,18 @@
 # For a containerized local dev environment, see: https://github.com/mastodon/mastodon/blob/main/README.md#docker
 
 services:
-  db:
-    restart: always
-    image: postgres:14-alpine
-    shm_size: 256mb
-    networks:
-      - internal_network
-    healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres']
-    volumes:
-      - ./postgres14:/var/lib/postgresql/data
-    environment:
-      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+  #  db:
+  #    restart: always
+  #    image: postgres:14-alpine
+  #    shm_size: 256mb
+  #    networks:
+  #      - internal_network
+  #    healthcheck:
+  #      test: ['CMD', 'pg_isready', '-U', 'postgres']
+  #    volumes:
+  #      - ./postgres14:/var/lib/postgresql/data
+  #    environment:
+  #      - 'POSTGRES_HOST_AUTH_METHOD=trust'
 
   redis:
     restart: always
@@ -58,7 +58,7 @@ services:
 
   web:
     # You can uncomment the following line if you want to not use the prebuilt image, for example if you have local code changes
-    # build: .
+    build: .
     image: ghcr.io/mastodon/mastodon:v4.3.7
     restart: always
     env_file: .env.production
@@ -72,7 +72,7 @@ services:
     ports:
       - '127.0.0.1:3000:3000'
     depends_on:
-      - db
+      #   - db
       - redis
       # - es
     volumes:
@@ -80,9 +80,9 @@ services:
 
   streaming:
     # You can uncomment the following lines if you want to not use the prebuilt image, for example if you have local code changes
-    # build:
-    #   dockerfile: ./streaming/Dockerfile
-    #   context: .
+    build:
+      dockerfile: ./streaming/Dockerfile
+      context: .
     image: ghcr.io/mastodon/mastodon-streaming:v4.3.7
     restart: always
     env_file: .env.production
@@ -96,7 +96,7 @@ services:
     ports:
       - '127.0.0.1:4000:4000'
     depends_on:
-      - db
+      #      - db
       - redis
 
   sidekiq:
@@ -107,7 +107,7 @@ services:
     env_file: .env.production
     command: bundle exec sidekiq
     depends_on:
-      - db
+      #      - db
       - redis
     networks:
       - external_network
