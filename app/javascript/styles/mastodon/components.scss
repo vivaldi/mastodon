@@ -2155,10 +2155,10 @@ $ui-header-height: 55px;
 
   &__logo {
     display: inline-flex;
-    padding: 15px;
+    padding: 10px 15px;
 
     .logo {
-      height: $ui-header-height - 30px;
+      height: $ui-header-height - 20px;
       width: auto;
     }
 
@@ -2967,7 +2967,6 @@ $ui-header-height: 55px;
   }
 
   .logo {
-    height: 30px;
     width: auto;
   }
 }
