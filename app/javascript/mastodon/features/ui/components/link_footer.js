@@ -55,7 +55,7 @@ class LinkFooter extends React.PureComponent {
     return (
       <div className='link-footer'>
         <p>
-          <strong>{domain}</strong>:
+          <strong>Vivaldi Social</strong>:
           {' '}
           <Link key='about' to='/about'><FormattedMessage id='footer.about' defaultMessage='About' /></Link>
           {canInvite && (
@@ -78,8 +78,6 @@ class LinkFooter extends React.PureComponent {
           <strong>Mastodon</strong>:
           {' '}
           <a href='https://joinmastodon.org' target='_blank'><FormattedMessage id='footer.about' defaultMessage='About' /></a>
-          {' · '}
-          <a href='https://joinmastodon.org/apps' target='_blank'><FormattedMessage id='footer.get_app' defaultMessage='Get the app' /></a>
           {' · '}
           <Link to='/keyboard-shortcuts'><FormattedMessage id='footer.keyboard_shortcuts' defaultMessage='Keyboard shortcuts' /></Link>
           {' · '}
