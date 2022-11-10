@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   self_destruct = SelfDestructHelper.self_destruct?
 
   navigation.items do |n|
-    n.item :web, safe_join([material_symbol('chevron_left'), t('settings.back')]), root_path
+    n.item :web, safe_join([material_symbol('chevron_left'), 'Back to Vivaldi Social']), root_path
 
     n.item :software_updates, safe_join([material_symbol('report'), t('admin.critical_update_pending')]), admin_software_updates_path, if: -> { ENV['UPDATE_CHECK_URL'] != '' && current_user.can?(:view_devops) && SoftwareUpdate.urgent_pending? }, html: { class: 'warning' }
 

@@ -2780,14 +2780,14 @@ $ui-header-logo-wordmark-width: 99px;
 
   &__logo {
     display: inline-flex;
-    padding: 15px;
+    padding: 10px 15px;
     flex-grow: 1;
     flex-shrink: 1;
     overflow: hidden;
     container: header-logo / inline-size;
 
     .logo {
-      height: $ui-header-height - 30px;
+      height: $ui-header-height - 20px;
       width: auto;
     }
 
@@ -3533,7 +3533,6 @@ $ui-header-logo-wordmark-width: 99px;
   }
 
   .logo {
-    height: 30px;
     width: auto;
   }
 
