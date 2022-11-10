@@ -11,7 +11,7 @@ module BrandingHelper
   end
 
   def _logo_as_symbol_wordmark
-    content_tag(:svg, tag.use(href: '#logo-symbol-wordmark'), viewBox: '0 0 261 66', class: 'logo logo--wordmark')
+    content_tag(:svg, tag.use(href: '#logo-symbol-wordmark'), viewBox: '0 0 196 48', class: 'logo logo--wordmark')
   end
 
   def _logo_as_symbol_icon
