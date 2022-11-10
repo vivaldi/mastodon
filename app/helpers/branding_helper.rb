@@ -11,7 +11,7 @@ module BrandingHelper
   end
 
   def _logo_as_symbol_wordmark
-    tag.svg(viewBox: '0 0 261 66', class: 'logo logo--wordmark') do
+    tag.svg(viewBox: '0 0 196 48', class: 'logo logo--wordmark') do
       tag.title('Mastodon') +
         tag.use(href: '#logo-symbol-wordmark')
     end
