@@ -6,6 +6,7 @@ ready(() => {
 
   if (!image) return;
 
+  /*
   image.addEventListener('mouseenter', () => {
     image.src = '/oops.gif';
   });
@@ -13,6 +14,7 @@ ready(() => {
   image.addEventListener('mouseleave', () => {
     image.src = '/oops.png';
   });
+  */
 }).catch((e: unknown) => {
   console.error(e);
 });
