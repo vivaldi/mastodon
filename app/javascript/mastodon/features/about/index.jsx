@@ -95,7 +95,7 @@ class About extends PureComponent {
               className='about__header__hero'
             />
             <NavigationFocusTarget as='h1'>
-              {isLoading ? <Skeleton width='10ch' /> : domain}
+              {isLoading ? <Skeleton width='10ch' /> : 'Vivaldi Social'}
             </NavigationFocusTarget>
             <p><FormattedMessage id='about.powered_by' defaultMessage='Decentralized social media powered by {mastodon}' values={{ mastodon: <a href='https://joinmastodon.org' className='about__mail' target='_blank' rel='noopener'>Mastodon</a> }} /></p>
           </div>
