@@ -31,23 +31,27 @@ module Omniauthable
       user   = signed_in_resource || identity.user
       user ||= create_for_oauth(auth)
 
-      if identity.user.nil?
-        identity.user = user
-        identity.save!
+      # Do not save identity if registrations are closed
+      if allowed_registrations?
+        if identity.user.nil?
+          identity.user = user
+          identity.save!
+        end
       end
 
-      # Update the email if it has been updated in the openid provider
-      if user.email != auth.info.email
-        user.email = auth.info.email
-        user.save!
-        user.update!(email: user.email)
-        user.confirm
-      end
+      if user
+        # Update the email if it has been updated in the openid provider
+        if user.email != auth.info.email
+          user.update!(email: auth.info.email)
+          user.confirm
+          user.save!
+        end
 
-      # Update the avatar if it has been updated in the openid provider
-      if user.account.avatar_remote_url != auth.info.image
-        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
-        user.save!
+        # Update the avatar if it has been updated in the openid provider
+        if user.account.avatar_remote_url != auth.info.image
+          user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
+          user.save!
+        end
       end
 
       user
@@ -67,11 +71,15 @@ module Omniauthable
 
       return user unless user.nil?
 
-      user = User.new(user_params_from_auth(email, auth))
+      # Do not create user if registrations are closed
+      if allowed_registrations?
+        user = User.new(user_params_from_auth(email, auth))
 
-      user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
-      user.skip_confirmation! if email_is_verified
-      user.save!
+        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
+        user.skip_confirmation! if email_is_verified
+        user.save!
+      end
+
       user
     end
 
@@ -106,6 +114,10 @@ module Omniauthable
       temp_username = starting_username.gsub(/[^a-z0-9_]+/i, '')
       validated_username = temp_username.truncate(30, omission: '')
       validated_username
+    end
+
+    def allowed_registrations?
+      Setting.registrations_mode != 'none'
     end
   end
 end
