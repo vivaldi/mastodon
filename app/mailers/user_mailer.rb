@@ -16,7 +16,9 @@ class UserMailer < Devise::Mailer
     @token    = token
     @instance = Rails.configuration.x.local_domain
 
-    return unless @resource.active_for_authentication?
+    # we just return here as we don't want to send confirmation_instructions when omniauth changes email
+    # return unless @resource.active_for_authentication?
+    return
 
     I18n.with_locale(locale) do
       mail to: @resource.unconfirmed_email.presence || @resource.email,
@@ -52,7 +54,9 @@ class UserMailer < Devise::Mailer
     @resource = user
     @instance = Rails.configuration.x.local_domain
 
-    return unless @resource.active_for_authentication?
+    # we just return here as we don't want to send confirmation_instructions when omniauth changes email
+    # return unless @resource.active_for_authentication?
+    return
 
     I18n.with_locale(locale) do
       mail to: @resource.email, subject: I18n.t('devise.mailer.email_changed.subject')
