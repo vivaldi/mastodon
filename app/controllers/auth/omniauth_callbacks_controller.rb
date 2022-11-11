@@ -7,6 +7,11 @@ class Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     define_method provider do
       @user = User.find_for_oauth(request.env['omniauth.auth'], current_user)
 
+      # Check if we got a user from find_for_oauth, if not registrations are closed and user is redirected to front page
+      if @user.nil?
+        redirect_to root_path and return
+      end
+
       if @user.persisted?
         LoginActivity.create(
           user: @user,
