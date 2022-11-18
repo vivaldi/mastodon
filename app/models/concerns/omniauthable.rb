@@ -32,7 +32,7 @@ module Omniauthable
       user ||= create_for_oauth(auth)
 
       # Do not save identity if registrations are closed
-      if allowed_registrations?
+      if allowed_registrations? && user
         if identity.user.nil?
           identity.user = user
           identity.save!
@@ -40,11 +40,13 @@ module Omniauthable
       end
 
       if user
-        # Update the email if it has been updated in the openid provider
+        # Update the email if it has been updated in the openid provider and no other user has it assigned
         if user.email != auth.info.email
-          user.update!(email: auth.info.email)
-          user.confirm
-          user.save!
+          if User.find_by(email: auth.info.email).nil?
+            user.update!(email: auth.info.email)
+            user.confirm
+            user.save!
+          end
         end
 
         # Update the avatar if it has been updated in the openid provider
@@ -67,12 +69,15 @@ module Omniauthable
       email_is_verified = auth.info.verified || auth.info.verified_email || auth.info.email_verified || assume_verified
       email             = auth.info.verified_email || auth.info.email
 
-      user = User.find_by(email: email) if email_is_verified
-
-      return user unless user.nil?
-
       # Do not create user if registrations are closed
       if allowed_registrations?
+
+        user_with_email = User.find_by(email: email) if email_is_verified
+
+        if user_with_email
+          return false
+        end
+
         user = User.new(user_params_from_auth(email, auth))
 
         begin

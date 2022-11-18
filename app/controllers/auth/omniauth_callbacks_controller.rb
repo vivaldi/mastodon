@@ -7,9 +7,13 @@ class Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     define_method provider do
       @user = User.find_for_oauth(request.env['omniauth.auth'], current_user)
 
+      if @user == false
+        redirect_to new_user_session_path, alert: "Email is connected to another account" and return
+      end
+
       # Check if we got a user from find_for_oauth, if not registrations are closed and user is redirected to front page
       if @user.nil?
-        redirect_to root_path and return
+        redirect_to new_user_session_path, alert: registrations_message and return
       end
 
       if @user.persisted?
@@ -34,6 +38,14 @@ class Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   Devise.omniauth_configs.each_key do |provider|
     provides_callback_for provider
+  end
+
+  def registrations_message
+    if Setting.closed_registrations_message.present?
+      Setting.closed_registrations_message
+    else
+      "Registrations have been temporarily closed"
+    end
   end
 
   def after_sign_in_path_for(resource)
