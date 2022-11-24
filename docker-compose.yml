@@ -129,5 +129,7 @@ services:
 
 networks:
   external_network:
+    driver_opts:
+      com.docker.network.driver.mtu: 1420
   internal_network:
     internal: true
