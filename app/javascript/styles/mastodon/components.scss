@@ -2244,6 +2244,56 @@ $ui-header-height: 55px;
   }
 }
 
+@media (min-width: 1600px) {
+  .column {
+    width: 420px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .column {
+    width: 470px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .column {
+    width: 520px;
+  }
+}
+
+@media (min-width: 2100px) {
+  .column {
+    width: 570px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .column {
+    width: 590px;
+  }
+}
+
+.columns-area:has(.column + .column + .column + .column) .column {
+  width: 350px;
+}
+
+@media (min-width: 1920px) {
+  .columns-area:has(.column + .column + .column + .column) .column {
+    width: 390px;
+  }
+}
+
+@media (min-width: 2180px) {
+  .columns-area:has(.column + .column + .column + .column) .column {
+    width: 440px;
+  }
+}
+
+.columns-area:has(.column + .column + .column + .column + .column) .column {
+  width: 350px;
+}
+
 .ui {
   flex: 0 0 auto;
   display: flex;
