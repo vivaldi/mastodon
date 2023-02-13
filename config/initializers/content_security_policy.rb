@@ -15,6 +15,7 @@ media_host   = host_to_url(ENV['S3_ALIAS_HOST'])
 media_host ||= host_to_url(ENV['S3_CLOUDFRONT_HOST'])
 media_host ||= host_to_url(ENV['S3_HOSTNAME']) if ENV['S3_ENABLED'] == 'true'
 media_host ||= assets_host
+login_host = ENV['OIDC_AUTH_ENDPOINT'].chomp("oauth2/authorize") if ENV['OIDC_ENABLED'] == 'true'
 
 Rails.application.config.content_security_policy do |p|
   p.base_uri        :none
@@ -26,7 +27,12 @@ Rails.application.config.content_security_policy do |p|
   p.media_src       :self, :https, :data, assets_host
   p.frame_src       :self, :https
   p.manifest_src    :self, assets_host
-  p.form_action     :self
+
+  if ENV['OIDC_ENABLED'] == 'true'
+    p.form_action   :self, login_host
+  else
+    p.form_action   :self
+  end
 
   if Rails.env.development?
     webpacker_urls = %w(ws http).map { |protocol| "#{protocol}#{Webpacker.dev_server.https? ? 's' : ''}://#{Webpacker.dev_server.host_with_port}" }
