@@ -32,19 +32,9 @@
 
   .fields-row
     .fields-row__column.fields-row__column-6
-      .fields-group
-        = f.input :avatar,
-                  hint: t('simple_form.hints.defaults.avatar', dimensions: '400x400', size: number_to_human_size(Account::Avatar::LIMIT)),
-                  input_html: { accept: Account::Avatar::IMAGE_MIME_TYPES.join(',') },
-                  wrapper: :with_block_label
-
-    .fields-row__column.fields-row__column-6
-      .fields-group
-        = image_tag @account.avatar.url, class: 'fields-group__thumbnail', id: 'account_avatar-preview'
-        - if @account.avatar.present?
-          = link_to settings_profile_picture_path('avatar'), data: { method: :delete }, class: 'link-button link-button--destructive' do
-            = material_symbol 'delete'
-            = t('generic.delete')
+      .input.with_block_label
+        %label= 'Avatar'
+        %span.hint!= 'Update your avatar on <a href="https://login.vivaldi.net/profile/samlsso">your profile</a> page and re-login to Vivaldi Social'
 
   .fields-row
     .fields-row__column.fields-row__column-6
