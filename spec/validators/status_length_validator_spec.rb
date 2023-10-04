@@ -31,13 +31,13 @@ RSpec.describe StatusLengthValidator do
     end
 
     it 'adds an error when text is over character limit' do
-      status = status_double(text: 'a' * 520)
+      status = status_double(text: 'a' * 1357)
       subject.validate(status)
       expect(status.errors).to have_received(:add)
     end
 
     it 'adds an error when text and content warning are over character limit total' do
-      status = status_double(spoiler_text: 'a' * 250, text: 'b' * 251)
+      status = status_double(spoiler_text: 'a' * 250, text: 'b' * 1087)
       subject.validate(status)
       expect(status.errors).to have_received(:add)
     end
