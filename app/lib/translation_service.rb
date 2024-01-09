@@ -18,13 +18,17 @@ class TranslationService
         configuration.libre_translate[:endpoint],
         configuration.libre_translate[:api_key]
       )
+    elsif configuration.lingvanex[:endpoint].present?
+      TranslationService::Lingvanex.new(
+        configuration.lingvanex[:endpoint]
+      )
     else
       raise NotConfiguredError
     end
   end
 
   def self.configured?
-    configuration.deepl[:api_key].present? || configuration.libre_translate[:endpoint].present?
+    configuration.deepl[:api_key].present? || configuration.libre_translate[:endpoint].present? || configuration.lingvanex[:endpoint].present?
   end
 
   def self.configuration
