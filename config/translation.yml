@@ -5,3 +5,5 @@ shared:
   libre_translate:
     api_key: <%= ENV.fetch('LIBRE_TRANSLATE_API_KEY', nil)&.to_json %>
     endpoint: <%= ENV.fetch('LIBRE_TRANSLATE_ENDPOINT', nil)&.to_json %>
+  lingvanex:
+    endpoint: <%= ENV.fetch('LINGVANEX_TRANSLATE_ENDPOINT', nil)&.to_json %>
