@@ -31,7 +31,7 @@
   filter: drop-shadow(1px 0 0 #282c37) drop-shadow(-1px 0 0 #282c37) drop-shadow(0 1px 0 #282c37) drop-shadow(0 -1px 0 #282c37);
 }
 
-.theme-mastodon-light, .theme-tangerineui, .theme-tangerineui-purple, .theme-tangerineui-cherry, .theme-tangerineui-lagoon, .theme-mastodon-bird-ui-light, .theme-system {
+.theme-mastodon-light, .theme-tangerineui, .theme-tangerineui-purple, .theme-tangerineui-cherry, .theme-tangerineui-lagoon, .theme-tangerineui-granite, .theme-mastodon-bird-ui-light, .theme-system {
   .badge-level1,
   .badge-level2,
   .badge-level3 {
@@ -40,7 +40,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .theme-tangerineui, .theme-tangerineui-cherry, .theme-tangerineui-lagoon, .theme-tangerineui-purple, .theme-system {
+  .theme-tangerineui, .theme-tangerineui-cherry, .theme-tangerineui-lagoon, .theme-tangerineui-purple, .theme-tangerineui-granite, .theme-system {
     .badge-level1,
     .badge-level2,
     .badge-level3 {
@@ -106,7 +106,12 @@
 }
 
 .notification-group__embedded-status .badge,
-.hover-card .badge {
+.hover-card .badge,
+.theme-tangerineui .status__quote .badge,
+.theme-tangerineui-cherry .status__quote .badge,
+.theme-tangerineui-lagoon .status__quote .badge,
+.theme-tangerineui-purple .status__quote .badge,
+.theme-tangerineui-granite .status__quote .badge {
   display: none;
 }
 
@@ -126,7 +131,8 @@
 .theme-tangerineui.layout-single-column,
 .theme-tangerineui-cherry.layout-single-column,
 .theme-tangerineui-lagoon.layout-single-column,
-.theme-tangerineui-purple.layout-single-column {
+.theme-tangerineui-purple.layout-single-column,
+.theme-tangerineui-granite.layout-single-column {
   .account__header__bar .avatar .account__avatar {
     height: 100px !important;
     width: 100px !important
