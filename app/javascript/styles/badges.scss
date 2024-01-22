@@ -106,7 +106,11 @@
 }
 
 .notification-group__embedded-status .badge,
-.hover-card .badge {
+.hover-card .badge,
+.theme-tangerineui .status__quote .badge,
+.theme-tangerineui-cherry .status__quote .badge,
+.theme-tangerineui-lagoon .status__quote .badge,
+.theme-tangerineui-purple .status__quote .badge {
   display: none;
 }
 
