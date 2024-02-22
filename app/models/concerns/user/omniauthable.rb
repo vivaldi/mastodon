@@ -47,7 +47,7 @@ module User::Omniauthable
 
       # Update the avatar if it has been updated in the openid provider
       if user.account.avatar_remote_url != auth.info.image
-        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
+        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image) and File.extname(auth.info.image.downcase) != ".bmp"
         user.save!
       end
 
@@ -87,7 +87,7 @@ module User::Omniauthable
       user = User.new(user_params_from_auth(email, auth))
 
       begin
-        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image)
+        user.account.avatar_remote_url = auth.info.image if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(auth.info.image) and File.extname(auth.info.image.downcase) != ".bmp"
       rescue Mastodon::UnexpectedResponseError
         user.account.avatar_remote_url = nil
       end
