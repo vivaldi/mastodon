@@ -2811,7 +2811,7 @@ body.embed .button.logo-button:hover,
 @media (min-width: 889px) {
   .layout-single-column .compose-form .autosuggest-textarea__textarea {
     /* stylelint-disable-next-line */
-    max-height: 20vh !important;  /* stylelint-disable-next-line */
+    max-height: 30vh !important;  /* stylelint-disable-next-line */
     overflow-y: auto !important;
     resize: none;
   }
