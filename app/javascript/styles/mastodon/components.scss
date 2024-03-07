@@ -491,12 +491,6 @@ body > [data-popper-placement] {
       height: 100px !important; // Prevent auto-resize textarea
       resize: vertical;
     }
-
-		@media (min-width: 1175px) {
-      min-height: 160px; // Taller text area for large screens
-      resize: vertical !important;
-    }
-
   }
 
   .autosuggest-textarea__suggestions-wrapper {
