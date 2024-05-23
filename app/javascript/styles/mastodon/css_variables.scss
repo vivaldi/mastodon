@@ -19,7 +19,7 @@
   --surface-variant-active-background-color: #{lighten($ui-base-color, 4%)};
   --surface-border-color: #{lighten($ui-base-color, 8%)};
   --on-surface-color: #{color.adjust($ui-base-color, $alpha: -0.5)};
-  --avatar-border-radius: 8px;
+  --avatar-border-radius: 50%;
   --media-outline-color: #{rgba(#fcf8ff, 0.15)};
   --overlay-icon-shadow: drop-shadow(
     0 0 8px #{color.change($base-shadow-color, $alpha: 0.35)}
