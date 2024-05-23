@@ -51,6 +51,27 @@ module Omniauthable
         user.save!
       end
 
+      donator = auth.extra.raw_info.donator
+
+      if donator
+        supporter_role = UserRole.find_by(name: 'Vivaldi Supporter')
+        patron_role    = UserRole.find_by(name: 'Vivaldi Patron')
+        advocate_role  = UserRole.find_by(name: 'Vivaldi Advocate')
+
+        if user.role_id.blank? || user.role_id == supporter_role.id || user.role_id == patron_role.id || user.role_id == advocate_role.id
+          if donator == '1'
+            user.role_id = supporter_role.id
+            user.save!
+          elsif donator == '2'
+            user.role_id = patron_role.id
+            user.save!
+          elsif donator == '3'
+            user.role_id = advocate_role.id
+            user.save!
+          end
+        end
+      end
+
       user
     end
 
