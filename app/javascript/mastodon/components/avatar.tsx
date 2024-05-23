@@ -40,6 +40,7 @@ export const Avatar: React.FC<Props> = ({
   const { hovering, handleMouseEnter, handleMouseLeave } = useHovering(animate);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const handleBadgeClick = function(e) { window.open('https://login.vivaldi.net/profile/donations', '_blank', 'noopener'); e.preventDefault(); e.stopPropagation(); }
 
   const style = {
     ...styleFromParent,
@@ -56,6 +57,22 @@ export const Avatar: React.FC<Props> = ({
   const handleError = useCallback(() => {
     setError(true);
   }, [setError]);
+
+  let supporterBadge = false, patronBadge = false, advocateBadge = false, roleName = null, badge = '';
+  if (account?.roles) {
+    account.roles.map((role) => {
+      if (role.name == 'Vivaldi Supporter') {
+        supporterBadge = true;
+        roleName = 'Vivaldi Supporter';
+      } else if (role.name == 'Vivaldi Patron') {
+        patronBadge = true;
+        roleName = 'Vivaldi Patron';
+      } else if (role.name == 'Vivaldi Advocate') {
+        advocateBadge = true;
+        roleName = 'Vivaldi Advocate';
+      }
+    });
+  }
 
   const avatar = (
     <span
@@ -82,6 +99,21 @@ export const Avatar: React.FC<Props> = ({
     </span>
   );
 
+  if (roleName !== null) {
+    badge = (
+      <div
+        className={classNames('badge', {
+          'badge-level1': supporterBadge,
+          'badge-level2': patronBadge,
+          'badge-level3': advocateBadge,
+        })}
+        onClick={handleBadgeClick}
+        title={roleName}
+      >
+      </div>
+    );
+  }
+
   if (withLink) {
     return (
       <Link
@@ -89,12 +121,20 @@ export const Avatar: React.FC<Props> = ({
         title={`@${account?.acct}`}
         data-hover-card-account={account?.id}
       >
-        {avatar}
+        <div className='avatarwrap'>
+          {avatar}
+          {badge}
+        </div>
       </Link>
     );
   }
 
-  return avatar;
+  return (
+    <div className='avatarwrap'>
+      {avatar}
+      {badge}
+    </div>
+  );
 };
 
 export const AvatarById: React.FC<
