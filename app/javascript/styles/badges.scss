@@ -1,0 +1,142 @@
+.account__avatar img, .account__header__bar .avatar .account__avatar, .account-card__title__avatar .account__avatar, .account-card__title__avatar img {
+  border-radius: 100%;
+}
+
+.account__avatar img {
+  display: block;
+}
+
+.avatarwrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+._comp_status_header__avatar .avatarwrap {
+  width: 46px;
+}
+
+.inline-follow-suggestions__body__scrollable__card__avatar {
+  height: 70px;
+}
+
+.inline-follow-suggestions .avatarwrap {
+  width: 70px;
+  height: 70px;
+}
+
+.account__avatar-composite {
+  overflow: visible;
+}
+
+.avatarwrap .badge {
+  cursor: pointer;
+}
+
+.compose-panel .badge {
+  z-index: 2;
+}
+
+.badge-level1,
+.badge-level2,
+.badge-level3 {
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(1px 0 0 #282c37) drop-shadow(-1px 0 0 #282c37) drop-shadow(0 1px 0 #282c37) drop-shadow(0 -1px 0 #282c37);
+}
+
+html[data-color-scheme="light"] .badge-level1,
+html[data-color-scheme="light"] .badge-level2,
+html[data-color-scheme="light"] .badge-level3 {
+  filter: drop-shadow(1px 0 0 #FFFFFF) drop-shadow(-1px 0 0 #FFFFFF) drop-shadow(0 1px 0 #FFFFFF) drop-shadow(0 -1px 0 #FFFFFF);
+}
+
+.badge-level1 {
+  background: transparent url('../images/badge-level1-size16.png') center no-repeat;
+  background-size: 16px
+}
+
+.badge-level2 {
+  background: transparent url('../images/badge-level2-size16.png') center no-repeat;
+  background-size: 16px
+}
+
+.badge-level3 {
+  background: transparent url('../images/badge-level3-size16.png') center no-repeat;
+  background-size: 16px
+}
+
+.ui__header {
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    right: -3px;
+  }
+}
+
+._navigation_panel_redesign__footer {
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    right: -3px;
+  }
+}
+
+.notification-group__avatar-group {
+  overflow-y: visible;
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    right: -3px;
+  }
+}
+
+._comp_account_header__avatarWrapper {
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    width: 34px;
+    height: 34px;
+    bottom: 0px;
+    right: -3px;
+  }
+}
+
+._comp_account_header__avatarWrapper .badge-level1 {
+  background: transparent url('../images/badge-level1-size34.png') center no-repeat;
+  background-size: 34px
+}
+
+._comp_account_header__avatarWrapper .badge-level2 {
+  background: transparent url('../images/badge-level2-size34.png') center no-repeat;
+  background-size: 34px
+}
+
+._comp_account_header__avatarWrapper .badge-level3 {
+  background: transparent url('../images/badge-level3-size34.png') center no-repeat;
+  background-size: 34px
+}
+
+.notification-group__embedded-status .badge,
+.hover-card .badge,
+._comp_card__titleImage .badge,
+._comp_status_prepend__contents .badge,
+._feat_compose__textareaWrapper .badge,
+.collection-preview .badge {
+  display: none;
+}
+
+.autosuggest-account-icon {
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    background-size: 8px;
+    bottom: -2px;
+    height: 8px;
+    right: -2px;
+    width: 8px
+  }
+}
