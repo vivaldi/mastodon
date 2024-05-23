@@ -351,7 +351,7 @@ code {
       margin-bottom: 10px;
       max-width: 100%;
       height: auto;
-      border-radius: var(--avatar-border-radius);
+      border-radius: 8px;
       background: url('images/void.png');
 
       &[src$='missing.png'] {
