@@ -1,0 +1,70 @@
+.account__avatar img, .account__header__bar .avatar .account__avatar {
+  border-radius: 100%;
+}
+
+.badge-level1,
+.badge-level2,
+.badge-level3 {
+  position: relative;
+  overflow: visible;
+}
+
+.badge-level1:after,
+.badge-level2:after,
+.badge-level3:after {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 16px;
+  height: 16px;
+  bottom: -1px;
+  left: 31px;
+}
+
+.badge-level1:after {
+  background: transparent url('../images/badge-level1.png') center no-repeat;
+  background-size: 16px;
+}
+
+.badge-level2:after{
+  background: transparent url('../images/badge-level2.png') center no-repeat;
+  background-size: 16px;
+}
+
+.badge-level3:after {
+  background: transparent url('../images/badge-level3.png') center no-repeat;
+  background-size: 16px;
+}
+
+.account__header {
+  .account__avatar, .account__header__tabs {
+    overflow: visible;
+  }
+  .badge-level1:after,
+  .badge-level2:after,
+  .badge-level3:after {
+    width: 35px;
+    height: 35px;
+    bottom: -5px;
+    left: 59px;
+  }
+  .badge-level1:after {
+    background: transparent url('../images/badge-level1-profile.png') center no-repeat;
+    background-size: 35px;
+  }
+  .badge-level2:after{
+    background: transparent url('../images/badge-level2-profile.png') center no-repeat;
+    background-size: 35px;
+  }
+  .badge-level3:after {
+    background: transparent url('../images/badge-level3-profile.png') center no-repeat;
+    background-size: 35px;
+  }
+}
+
+.theme-mastodon-bird-ui-dark.layout-single-column .account__header__bar .avatar .account__avatar,
+.theme-mastodon-bird-ui-light.layout-single-column .account__header__bar .avatar .account__avatar,
+.theme-mastodon-bird-ui-contrast.layout-single-column .account__header__bar .avatar .account__avatar {
+  width: 106px !important;
+  height: 106px !important;
+}

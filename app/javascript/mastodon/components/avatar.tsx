@@ -32,10 +32,25 @@ export const Avatar: React.FC<Props> = ({
       ? account?.get('avatar')
       : account?.get('avatar_static');
 
+  let supporterBadge = false, patronBadge = false, advocateBadge = false;
+  if (account?.get('roles')) {
+    account?.get('roles').map((role) => {
+      if (role.get('name') == 'Vivaldi Supporter') {
+        supporterBadge = true;
+      } else if (role.get('name') == 'Vivaldi Patron') {
+        patronBadge = true;
+      } else if (role.get('name') == 'Vivaldi Advocate') {
+        advocateBadge = true;
+      }
+    });
+  }
   return (
     <div
       className={classNames('account__avatar', {
         'account__avatar-inline': inline,
+        'badge-level1': supporterBadge,
+        'badge-level2': patronBadge,
+        'badge-level3': advocateBadge,
       })}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
