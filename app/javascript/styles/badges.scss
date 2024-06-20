@@ -68,3 +68,13 @@
   width: 106px !important;
   height: 106px !important;
 }
+
+.autosuggest-account-icon {
+  .badge-level1:after, .badge-level2:after, .badge-level3:after {
+    width: 8px;
+    height: 8px;
+    bottom: -2px;
+    left: 12px;
+    background-size: 8px;
+  }
+}
