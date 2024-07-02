@@ -57,11 +57,29 @@
   background-size: 35px
 }
 
-.theme-mastodon-bird-ui-contrast.layout-single-column .account__header__bar .avatar .account__avatar,
-.theme-mastodon-bird-ui-dark.layout-single-column .account__header__bar .avatar .account__avatar,
-.theme-mastodon-bird-ui-light.layout-single-column .account__header__bar .avatar .account__avatar {
-  height: 106px !important;
-  width: 106px !important
+.theme-mastodon-bird-ui-contrast.layout-single-column,
+.theme-mastodon-bird-ui-dark.layout-single-column,
+.theme-mastodon-bird-ui-light.layout-single-column {
+  .account__header__bar .avatar .account__avatar {
+    height: 106px !important;
+    width: 106px !important
+  }
+  .account__header .badge-level1, .account__header .badge-level2, .account__header .badge-level3 {
+    left: 72px;
+    bottom: -3px;
+  }
+}
+
+.theme-tangerineui.layout-single-column,
+.theme-tangerineui-purple.layout-single-column {
+  .account__header__bar .avatar .account__avatar {
+    height: 100px !important;
+    width: 100px !important
+  }
+  .account__header .badge-level1, .account__header .badge-level2, .account__header .badge-level3 {
+    left: 74px;
+    bottom: 3px;
+  }
 }
 
 .autosuggest-account-icon .badge-level1,
