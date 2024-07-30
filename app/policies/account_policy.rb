@@ -76,4 +76,16 @@ class AccountPolicy < ApplicationPolicy
   def index_featured_in_collections?
     current_account.id == record.id
   end
+
+  def avatar_remote_url?
+    role.can?(:manage_users) && role.overrides?(record.user_role)
+  end
+
+  def email?
+    role.can?(:manage_user_access) && role.overrides?(record.user_role)
+  end
+
+  def role?
+    role.can?(:manage_users) && role.overrides?(record.user_role)
+  end
 end
