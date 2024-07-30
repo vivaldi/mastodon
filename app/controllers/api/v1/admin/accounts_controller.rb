@@ -10,7 +10,7 @@ class Api::V1::Admin::AccountsController < Api::BaseController
   before_action -> { authorize_if_got_token! :'admin:write', :'admin:write:accounts' }, except: [:index, :show]
   before_action :set_accounts, only: :index
   before_action :set_account, except: :index
-  before_action :require_local_account!, only: [:enable, :approve, :reject]
+  before_action :require_local_account!, only: [:enable, :approve, :reject, :avatar_remote_url, :email, :role]
 
   after_action :verify_authorized
   after_action :insert_pagination_headers, only: :index
@@ -91,6 +91,46 @@ class Api::V1::Admin::AccountsController < Api::BaseController
     Admin::UnsuspensionWorker.perform_async(@account.id)
     log_action :unsuspend, @account
     render json: @account, serializer: REST::Admin::AccountSerializer
+  end
+
+  def avatar_remote_url
+    authorize @account, :avatar_remote_url?
+    @account.avatar_remote_url = params[:avatar_remote_url] if /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/.match?(params[:avatar_remote_url])
+    @account.save!
+    @account.update(avatar_remote_url: @account.avatar_remote_url)
+    ActivityPub::UpdateDistributionWorker.perform_async(@account.id)
+    render json: @account, serializer: REST::CredentialAccountSerializer
+  end
+
+
+  def email
+    authorize @account, :email?
+    @account.user.email = params[:email]
+    @account.user.save!
+    @account.user.update!(email: @account.user.email)
+    @account.user.confirm
+    render json: @account, serializer: REST::CredentialAccountSerializer
+  end
+
+  def role
+    authorize @account, :role?
+    donator = params[:role]
+    supporter_role = UserRole.find_by(name: 'Vivaldi Supporter')
+    patron_role    = UserRole.find_by(name: 'Vivaldi Patron')
+    advocate_role  = UserRole.find_by(name: 'Vivaldi Advocate')
+    if @account.user.role_id.blank? || @account.user.role_id == supporter_role.id || @account.user.role_id == patron_role.id || @account.user.role_id == advocate_role.id
+      if donator == '1'
+        @account.user.role_id = supporter_role.id
+        @account.user.save!
+      elsif donator == '2'
+        @account.user.role_id = patron_role.id
+        @account.user.save!
+      elsif donator == '3'
+        @account.user.role_id = advocate_role.id
+        @account.user.save!
+      end
+    end
+    render json: @account, serializer: REST::CredentialAccountSerializer
   end
 
   private
