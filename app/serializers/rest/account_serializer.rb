@@ -5,7 +5,7 @@ class REST::AccountSerializer < ActiveModel::Serializer
   include FormattingHelper
 
   attributes :id, :username, :acct, :display_name, :locked, :bot, :discoverable, :group, :created_at,
-             :note, :url, :uri, :avatar, :avatar_static, :header, :header_static,
+             :note, :url, :uri, :avatar, :avatar_static, :avatar_remote_url, :header, :header_static,
              :followers_count, :following_count, :statuses_count, :last_status_at
 
   has_one :moved_to_account, key: :moved, serializer: REST::AccountSerializer, if: :moved_and_not_nested?
@@ -76,6 +76,10 @@ class REST::AccountSerializer < ActiveModel::Serializer
 
   def avatar_static
     full_asset_url(object.suspended? ? object.avatar.default_url : object.avatar_static_url)
+  end
+
+  def avatar_remote_url
+    object.suspended? ? '' : object.avatar_remote_url
   end
 
   def header
