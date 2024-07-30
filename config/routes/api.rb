@@ -222,6 +222,9 @@ namespace :api, format: false do
           post :unsuspend
           post :approve
           post :reject
+          post :avatar_remote_url
+          post :email
+          post :role
         end
 
         resource :action, only: [:create], controller: 'account_actions'

@@ -64,4 +64,16 @@ class AccountPolicy < ApplicationPolicy
   def review?
     role.can?(:manage_taxonomies)
   end
+
+  def avatar_remote_url?
+    role.can?(:manage_users)
+  end
+
+  def email?
+    role.can?(:manage_users)
+  end
+
+  def role?
+    role.can?(:manage_users)
+  end
 end
