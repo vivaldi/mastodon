@@ -14,26 +14,26 @@
 .badge-level1,
 .badge-level2,
 .badge-level3 {
-  bottom: -1px;
   display: block;
-  height: 16px;
-  left: 31px;
   position: absolute;
-  width: 16px
+  bottom: -1px;
+  left: 31px;
+  width: 16px;
+  height: 16px;
 }
 
 .badge-level1 {
-  background: transparent url('../images/badge-level1.png') center no-repeat;
+  background: transparent url('../images/badge-level1-size16.png') center no-repeat;
   background-size: 16px
 }
 
 .badge-level2 {
-  background: transparent url('../images/badge-level2.png') center no-repeat;
+  background: transparent url('../images/badge-level2-size16.png') center no-repeat;
   background-size: 16px
 }
 
 .badge-level3 {
-  background: transparent url('../images/badge-level3.png') center no-repeat;
+  background: transparent url('../images/badge-level3-size16.png') center no-repeat;
   background-size: 16px
 }
 
@@ -41,24 +41,24 @@
 .account__header .badge-level2,
 .account__header .badge-level3 {
   bottom: -5px;
-  height: 35px;
   left: 59px;
-  width: 35px
+  width: 34px;
+  height: 34px;
 }
 
 .account__header .badge-level1 {
-  background: transparent url('../images/badge-level1-profile.png') center no-repeat;
-  background-size: 35px
+  background: transparent url('../images/badge-level1-size34.png') center no-repeat;
+  background-size: 34px
 }
 
 .account__header .badge-level2 {
-  background: transparent url('../images/badge-level2-profile.png') center no-repeat;
-  background-size: 35px
+  background: transparent url('../images/badge-level2-size34.png') center no-repeat;
+  background-size: 34px
 }
 
 .account__header .badge-level3 {
-  background: transparent url('../images/badge-level3-profile.png') center no-repeat;
-  background-size: 35px
+  background: transparent url('../images/badge-level3-size34.png') center no-repeat;
+  background-size: 34px
 }
 
 .theme-mastodon-bird-ui-contrast.layout-single-column,
