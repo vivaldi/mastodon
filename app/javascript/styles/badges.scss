@@ -31,6 +31,16 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  .theme-tangerineui, .theme-tangerineui-purple {
+    .badge-level1,
+    .badge-level2,
+    .badge-level3 {
+      filter: drop-shadow(1px 0 0 #111) drop-shadow(-1px 0 0 #111) drop-shadow(0 1px 0 #111) drop-shadow(0 -1px 0 #111);
+    }
+  }
+}
+
 .badge-level1 {
   background: transparent url('../images/badge-level1-size16.png') center no-repeat;
   background-size: 16px
