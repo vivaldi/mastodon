@@ -20,6 +20,15 @@
   left: 31px;
   width: 16px;
   height: 16px;
+  filter: drop-shadow(1px 0 0 #282c37) drop-shadow(-1px 0 0 #282c37) drop-shadow(0 1px 0 #282c37) drop-shadow(0 -1px 0 #282c37);
+}
+
+.theme-mastodon-light, .theme-tangerineui, .theme-tangerineui-purple, .theme-mastodon-bird-ui-light {
+  .badge-level1,
+  .badge-level2,
+  .badge-level3 {
+    filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff);
+  }
 }
 
 .badge-level1 {
