@@ -697,6 +697,7 @@ body.app-body  {
     order: 1;
 }
 .app-body .columns-area__panels__main {
+    contain: inline-size;
     order: 2;
 }
 .app-body .columns-area__panels__pane--compositional {
