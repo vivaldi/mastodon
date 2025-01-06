@@ -107,20 +107,6 @@ export const Profile = () => {
 
               <Icon icon={headerPreview ? EditIcon : AddPhotoAlternateIcon} />
             </label>
-
-            <label className={classNames('app-form__avatar-input', { selected: !!avatarPreview, invalid: !!errors?.avatar })} title={intl.formatMessage(messages.uploadAvatar)}>
-              <input
-                type='file'
-                hidden
-                ref={avatarFileRef}
-                accept='image/*'
-                onChange={handleAvatarChange}
-              />
-
-              {avatarPreview && <img src={avatarPreview} alt='' />}
-
-              <Icon icon={avatarPreview ? EditIcon : AddPhotoAlternateIcon} />
-            </label>
           </div>
 
           <div className={classNames('input with_block_label', { field_with_errors: !!errors?.display_name })}>
