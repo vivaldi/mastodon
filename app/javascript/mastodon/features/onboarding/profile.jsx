@@ -13,6 +13,7 @@ import Toggle from 'react-toggle';
 import AddPhotoAlternateIcon from '@/material-icons/400-24px/add_photo_alternate.svg?react';
 import EditIcon from '@/material-icons/400-24px/edit.svg?react';
 import { updateAccount } from 'mastodon/actions/accounts';
+import { closeOnboarding } from 'mastodon/actions/onboarding';
 import { Button } from 'mastodon/components/button';
 import { ColumnBackButton } from 'mastodon/components/column_back_button';
 import { Icon } from 'mastodon/components/icon';
@@ -34,7 +35,9 @@ export const Profile = () => {
   const [note, setNote] = useState(unescapeHTML(account.get('note')));
   const [avatar, setAvatar] = useState(null);
   const [header, setHeader] = useState(null);
-  const [discoverable, setDiscoverable] = useState(account.get('discoverable'));
+  const [discoverable, setDiscoverable] = useState(
+    account?.discoverable ?? true,
+  );
   const [isSaving, setIsSaving] = useState(false);
   const [errors, setErrors] = useState();
   const avatarFileRef = createRef();
@@ -76,7 +79,7 @@ export const Profile = () => {
       header,
       discoverable,
       indexable: discoverable,
-    })).then(() => history.push('/start/follows')).catch(err => {
+    })).then(() => history.push('/start/follows') && dispatch(closeOnboarding())).catch(err => {
       setIsSaving(false);
       setErrors(err.response.data.details);
     });
