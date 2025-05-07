@@ -101,6 +101,7 @@ RUN \
 --mount=type=cache,id=apt-cache-${TARGETPLATFORM},target=/var/cache/apt,sharing=locked \
 --mount=type=cache,id=apt-lib-${TARGETPLATFORM},target=/var/lib/apt,sharing=locked \
 # Apt update & upgrade to check for security updates to Debian image
+  apt-get install -y debian-keyring; \
   apt-get update; \
   apt-get dist-upgrade -yq; \
 # Install jemalloc, curl and other necessary components
