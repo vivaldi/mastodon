@@ -196,28 +196,13 @@ export const Profile: React.FC<{
                 icon={headerPreview ? EditIcon : AddPhotoAlternateIcon}
               />
             </label>
-
             <label
               className={classNames('app-form__avatar-input', {
                 selected: !!avatarPreview,
                 invalid: !!errors?.avatar,
               })}
-              title={intl.formatMessage(messages.uploadAvatar)}
             >
-              <input
-                type='file'
-                hidden
-                ref={avatarFileRef}
-                accept='image/*'
-                onChange={handleAvatarChange}
-              />
-
               {avatarPreview && <img src={avatarPreview} alt='' />}
-
-              <Icon
-                id=''
-                icon={avatarPreview ? EditIcon : AddPhotoAlternateIcon}
-              />
             </label>
           </div>
 
