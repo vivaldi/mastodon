@@ -56,13 +56,13 @@ export const Avatar: React.FC<Props> = ({
   let supporterBadge = false, patronBadge = false, advocateBadge = false, roleName = null, badge = '';
   if (account?.roles) {
     account.roles.map((role) => {
-      if (role.get('name') == 'Vivaldi Supporter') {
+      if (role.name == 'Vivaldi Supporter') {
         supporterBadge = true;
         roleName = 'Vivaldi Supporter';
-      } else if (role.get('name') == 'Vivaldi Patron') {
+      } else if (role.name == 'Vivaldi Patron') {
         patronBadge = true;
         roleName = 'Vivaldi Patron';
-      } else if (role.get('name') == 'Vivaldi Advocate') {
+      } else if (role.name == 'Vivaldi Advocate') {
         advocateBadge = true;
         roleName = 'Vivaldi Advocate';
       }
