@@ -8,7 +8,7 @@
 
 /* 📄 Meta */
 :root {
-    --version: "v2.4.2";
+    --version: "v2.4.4";
 
     --variant-name: "Purple";
     --variant-emoji: "\1FABB\00A0";
@@ -4214,7 +4214,6 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .column-link:not(.column-link--logo) {
     padding: 15px 5px 16px 24px;
     gap: 7px;
-    margin-left: 3px;
     border: 0;
     font-weight: 500;
     font-size: 18px;
@@ -4223,7 +4222,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 @media screen and (min-width:1175px) {
     .app-body .column-link:not(.column-link--logo) {
-        padding-left: 11px;
+        padding-left: 14px;
     }
 }
 .app-body .column-link--transparent:is(.active, .active:hover) {
@@ -7255,12 +7254,8 @@ a:is(.active,
 }
 @media screen and (max-width:1175px) {
     .app-body .announcements {
-        box-shadow: none;
-        margin-top: 1px;
         border-left: 0;
         border-right: 0;
-        margin-inline-start: -45px;
-        margin-inline-end: -55px;
     }
     .app-body .announcements__mastodon {
         border-radius: 0;
