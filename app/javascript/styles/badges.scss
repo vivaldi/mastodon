@@ -4,10 +4,19 @@
 
 .avatarwrap {
   position: relative;
+  aspect-ratio: 1 / 1;
+}
+
+.account__avatar-composite {
+  overflow: visible;
 }
 
 .avatarwrap .badge {
   cursor: pointer;
+}
+
+.compose-panel .badge {
+  z-index: 2;
 }
 
 .badge-level1,
@@ -72,7 +81,7 @@
   }
 }
 
-.account__header {
+.account__header__tabs {
   .badge-level1,
   .badge-level2,
   .badge-level3 {
@@ -81,22 +90,23 @@
   }
 }
 
-.account__header .badge-level1 {
+.account__header__tabs .badge-level1 {
   background: transparent url('../images/badge-level1-size34.png') center no-repeat;
   background-size: 34px
 }
 
-.account__header .badge-level2 {
+.account__header__tabs .badge-level2 {
   background: transparent url('../images/badge-level2-size34.png') center no-repeat;
   background-size: 34px
 }
 
-.account__header .badge-level3 {
+.account__header__tabs .badge-level3 {
   background: transparent url('../images/badge-level3-size34.png') center no-repeat;
   background-size: 34px
 }
 
-.notification-group__embedded-status .badge {
+.notification-group__embedded-status .badge,
+.hover-card .badge {
   display: none;
 }
 
@@ -107,7 +117,7 @@
     height: 106px !important;
     width: 106px !important
   }
-  .account__header .badge-level1, .account__header .badge-level2, .account__header .badge-level3 {
+  .account__header__tabs .badge-level1, .account__header__tabs .badge-level2, .account__header__tabs .badge-level3 {
     right: -3px;
     bottom: -3px;
   }
@@ -121,7 +131,7 @@
     height: 100px !important;
     width: 100px !important
   }
-  .account__header .badge-level1, .account__header .badge-level2, .account__header .badge-level3 {
+  .account__header__tabs .badge-level1, .account__header__tabs .badge-level2, .account__header__tabs .badge-level3 {
     right: 3px;
     bottom: 3px;
   }
