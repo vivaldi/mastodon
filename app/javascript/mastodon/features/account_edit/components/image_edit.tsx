@@ -72,35 +72,52 @@ export const AccountImageEdit: FC<{
     [dispatch, location],
   );
 
-  const items = useMemo(
-    () =>
-      [
-        {
-          text: intl.formatMessage(messages.replace),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
+  let items;
+  if (location === 'header') {
+    items = useMemo(
+      () =>
+        [
+          {
+            text: intl.formatMessage(messages.replace),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
+            },
+            icon: ArrowsClockwiseIcon,
           },
-          icon: ArrowsClockwiseIcon,
-        },
-        {
-          text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+          {
+            text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+            },
+            icon: hasAlt ? PencilIcon : PlusIcon,
           },
-          icon: hasAlt ? PencilIcon : PlusIcon,
-        },
-        null,
-        {
-          text: intl.formatMessage(messages.remove),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_DELETE');
+          null,
+          {
+            text: intl.formatMessage(messages.remove),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_DELETE');
+            },
+            icon: TrashIcon,
+            dangerous: true,
           },
-          icon: TrashIcon,
-          dangerous: true,
-        },
-      ] satisfies MenuItem[],
-    [handleModal, hasAlt, intl],
-  );
+        ] satisfies MenuItem[],
+      [handleModal, hasAlt, intl],
+    );
+  } else {
+    items = useMemo(
+      () =>
+        [
+          {
+            text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+            },
+            icon: hasAlt ? PencilIcon : PlusIcon,
+          },
+        ] satisfies MenuItem[],
+      [handleModal, hasAlt, intl],
+    );
+  }
 
   const handleAddImage = useCallback(() => {
     handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
@@ -109,6 +126,19 @@ export const AccountImageEdit: FC<{
   const iconClassName = classNames(classes.imageButton, className);
 
   if (!src) {
+    if (location !== 'header') {
+      return (
+        <IconButton
+          icon={PencilIcon}
+          className={iconClassName}
+          onClick={handleAddImage}
+          size='sm'
+          variant='solid'
+        >
+          {intl.formatMessage(messages.altAdd)}
+        </IconButton>
+      );
+    }
     return (
       <IconButton
         icon={CameraIcon}
@@ -122,6 +152,27 @@ export const AccountImageEdit: FC<{
     );
   }
 
+  if (location !== 'header') {
+    return (
+      <Menu>
+        <MenuTrigger
+          as={IconButton}
+          icon={PencilIcon}
+          size='sm'
+          variant='solid'
+          className={iconClassName}
+        >
+          {intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd)}
+        </MenuTrigger>
+        <MenuList
+          offset={6}
+          placement={location === 'header' ? 'bottom-end' : 'bottom-start'}
+        >
+          <LegacyDropdownMenuItems items={items} />
+        </MenuList>
+      </Menu>
+    );
+  }
   return (
     <Menu>
       <MenuTrigger
