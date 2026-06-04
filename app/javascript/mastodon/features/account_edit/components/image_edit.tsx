@@ -16,10 +16,7 @@ import type { ImageLocation } from '@/mastodon/reducers/slices/profile_edit';
 import { selectImageInfo } from '@/mastodon/reducers/slices/profile_edit';
 import { useAppDispatch, useAppSelector } from '@/mastodon/store';
 import AddIcon from '@/material-icons/400-24px/add.svg?react';
-import DeleteIcon from '@/material-icons/400-24px/delete.svg?react';
 import EditIcon from '@/material-icons/400-24px/edit.svg?react';
-import CameraIcon from '@/material-icons/400-24px/photo_camera.svg?react';
-import ReplaceImageIcon from '@/material-icons/400-24px/replace_image.svg?react';
 
 import classes from '../styles.module.scss';
 
@@ -27,10 +24,6 @@ const messages = defineMessages({
   add: {
     id: 'account_edit.image_edit.add_button',
     defaultMessage: 'Add image',
-  },
-  replace: {
-    id: 'account_edit.image_edit.replace_button',
-    defaultMessage: 'Replace image',
   },
   altAdd: {
     id: 'account_edit.image_edit.alt_add_button',
@@ -41,10 +34,6 @@ const messages = defineMessages({
     id: 'account_edit.image_edit.alt_edit_button',
     description: 'Alt is short for "alternative".',
     defaultMessage: 'Edit alt text',
-  },
-  remove: {
-    id: 'account_edit.image_edit.remove_button',
-    defaultMessage: 'Remove image',
   },
 });
 
@@ -70,46 +59,25 @@ export const AccountImageEdit: FC<{
     () =>
       [
         {
-          text: intl.formatMessage(messages.replace),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
-          },
-          icon: ReplaceImageIcon,
-        },
-        {
           text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
           action: () => {
             handleModal('ACCOUNT_EDIT_IMAGE_ALT');
           },
           icon: hasAlt ? EditIcon : AddIcon,
         },
-        null,
-        {
-          text: intl.formatMessage(messages.remove),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_DELETE');
-          },
-          icon: DeleteIcon,
-          dangerous: true,
-        },
       ] satisfies MenuItem[],
     [handleModal, hasAlt, intl],
   );
-
-  const handleAddImage = useCallback(() => {
-    handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
-  }, [handleModal]);
 
   const iconClassName = classNames(classes.imageButton, className);
 
   if (!src) {
     return (
       <IconButton
-        title={intl.formatMessage(messages.add)}
-        icon='camera'
-        iconComponent={CameraIcon}
+        title={intl.formatMessage(messages.altAdd)}
+        icon='edit'
+        iconComponent={EditIcon}
         className={iconClassName}
-        onClick={handleAddImage}
       />
     );
   }
@@ -120,9 +88,9 @@ export const AccountImageEdit: FC<{
       placement={location === 'header' ? 'bottom-end' : 'bottom-start'}
       offset={popperOffset}
       className={classes.imageMenu}
-      icon='camera'
-      title={intl.formatMessage(messages.replace)}
-      iconComponent={CameraIcon}
+      icon='edit'
+      title={intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd)}
+      iconComponent={EditIcon}
       iconClassName={iconClassName}
     />
   );
