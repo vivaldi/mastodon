@@ -1,0 +1,13 @@
+@use 'application';
+@use 'mastodon-bird-ui';
+@use 'mastodon-bird-ui/variables/light-mixin' as light;
+
+[data-color-scheme="light"] {
+  @include light.tokens;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-color-scheme]) {
+    @include light.tokens;
+  }
+}
