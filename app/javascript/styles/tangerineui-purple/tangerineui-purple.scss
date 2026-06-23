@@ -2405,6 +2405,10 @@ body.app-body  {
     border-radius: 8px;
     transition: all .3s;
     background-color: transparent;
+    color: transparent;
+    font-size: 0;
+    text-indent: -9999px;
+    overflow: hidden;
 }
 .app-body .compose-form .status__content__translate-button,
 .app-body .compose-form .translate-button .link-button {
@@ -4181,7 +4185,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     flex-flow: column;
 }
 .app-body .column-link--transparent {
-    color: var(--color-fg);
+    color: var(--color-accent);
 }
 .app-body .column-link--transparent:has(+ .navigation-panel__list-panel__header__sep) {
     max-width: 80%;
@@ -4386,7 +4390,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     }
 }
 .app-body .column-link--transparent:is(.active, .active:hover) {
-    color: var(--color-content-fg);
+    color: var(--color-accent);
     font-weight: bold;
 }
 .app-body .column-link--transparent:hover {
@@ -8473,4 +8477,19 @@ a:is(.active,
 )::before {
     background-image: var(--icon-olympics);
     transform: scale(1.85);
+}
+
+._feat_collections__heading,
+._comp_tab_list__tab {
+    color: var(--color-content-fg);
+}
+
+._comp_tab_list__tab.active {
+    color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
+}
+
+._comp_tab_list__tab:not(.active):is(:hover, :focus),
+._comp_empty_state_empty_state__content a {
+    color: var(--color-accent) !important;
 }
