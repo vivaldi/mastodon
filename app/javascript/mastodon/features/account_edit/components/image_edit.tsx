@@ -16,7 +16,10 @@ import type { ImageLocation } from '@/mastodon/reducers/slices/profile_edit';
 import { selectImageInfo } from '@/mastodon/reducers/slices/profile_edit';
 import { useAppDispatch, useAppSelector } from '@/mastodon/store';
 import AddIcon from '@/material-icons/400-24px/add.svg?react';
+import DeleteIcon from '@/material-icons/400-24px/delete.svg?react';
 import EditIcon from '@/material-icons/400-24px/edit.svg?react';
+import CameraIcon from '@/material-icons/400-24px/photo_camera.svg?react';
+import ReplaceImageIcon from '@/material-icons/400-24px/replace_image.svg?react';
 
 import classes from '../styles.module.scss';
 
@@ -24,6 +27,10 @@ const messages = defineMessages({
   add: {
     id: 'account_edit.image_edit.add_button',
     defaultMessage: 'Add image',
+  },
+  replace: {
+    id: 'account_edit.image_edit.replace_button',
+    defaultMessage: 'Replace image',
   },
   altAdd: {
     id: 'account_edit.image_edit.alt_add_button',
@@ -34,6 +41,10 @@ const messages = defineMessages({
     id: 'account_edit.image_edit.alt_edit_button',
     description: 'Alt is short for "alternative".',
     defaultMessage: 'Edit alt text',
+  },
+  remove: {
+    id: 'account_edit.image_edit.remove_button',
+    defaultMessage: 'Remove image',
   },
 });
 
@@ -55,42 +66,105 @@ export const AccountImageEdit: FC<{
     [dispatch, location],
   );
 
-  const items = useMemo(
-    () =>
-      [
-        {
-          text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
-          action: () => {
-            handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+  let items;
+  if (location === 'header') {
+    items = useMemo(
+      () =>
+        [
+          {
+            text: intl.formatMessage(messages.replace),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
+            },
+            icon: ReplaceImageIcon,
           },
-          icon: hasAlt ? EditIcon : AddIcon,
-        },
-      ] satisfies MenuItem[],
-    [handleModal, hasAlt, intl],
-  );
+          {
+            text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+            },
+            icon: hasAlt ? EditIcon : AddIcon,
+          },
+          null,
+          {
+            text: intl.formatMessage(messages.remove),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_DELETE');
+            },
+            icon: DeleteIcon,
+            dangerous: true,
+          },
+        ] satisfies MenuItem[],
+      [handleModal, hasAlt, intl],
+    );
+  } else {
+    items = useMemo(
+      () =>
+        [
+          {
+            text: intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd),
+            action: () => {
+              handleModal('ACCOUNT_EDIT_IMAGE_ALT');
+            },
+            icon: hasAlt ? EditIcon : AddIcon,
+          },
+        ] satisfies MenuItem[],
+      [handleModal, hasAlt, intl],
+    );
+  }
+
+  const handleAddImage = useCallback(() => {
+    handleModal('ACCOUNT_EDIT_IMAGE_UPLOAD');
+  }, [handleModal]);
 
   const iconClassName = classNames(classes.imageButton, className);
 
   if (!src) {
+    if (location !== 'header') {
+      return (
+        <IconButton
+          title={intl.formatMessage(messages.altAdd)}
+          icon='edit'
+          iconComponent={EditIcon}
+          className={iconClassName}
+          onClick={handleAddImage}
+        />
+      );
+    }
     return (
       <IconButton
-        title={intl.formatMessage(messages.altAdd)}
-        icon='edit'
-        iconComponent={EditIcon}
+        title={intl.formatMessage(messages.add)}
+        icon='camera'
+        iconComponent={CameraIcon}
         className={iconClassName}
+        onClick={handleAddImage}
       />
     );
   }
 
+  if (location !== 'header') {
+    return (
+      <Dropdown
+        items={items}
+        placement={location === 'header' ? 'bottom-end' : 'bottom-start'}
+        offset={popperOffset}
+        className={classes.imageMenu}
+        icon='edit'
+        title={intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd)}
+        iconComponent={EditIcon}
+        iconClassName={iconClassName}
+      />
+    );
+  }
   return (
     <Dropdown
       items={items}
       placement={location === 'header' ? 'bottom-end' : 'bottom-start'}
       offset={popperOffset}
       className={classes.imageMenu}
-      icon='edit'
-      title={intl.formatMessage(hasAlt ? messages.altEdit : messages.altAdd)}
-      iconComponent={EditIcon}
+      icon='camera'
+      title={intl.formatMessage(messages.replace)}
+      iconComponent={CameraIcon}
       iconClassName={iconClassName}
     />
   );
