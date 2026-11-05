@@ -1,0 +1,5 @@
+/* Fix image margins on error pages */
+
+body.error .dialog__illustration img {
+  margin: auto auto 30px auto;
+}
