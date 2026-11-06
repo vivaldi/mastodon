@@ -1,3 +1,9 @@
+/* Extra wide columns in advanced mode */
+
+.layout-multiple-columns ._comp_column__root {
+  width: clamp(360px, var(--available-width) / 4 - var(--multi-column-gap), 600px) !important;
+}
+
 /* Fix image margins on error pages */
 
 body.error .dialog__illustration img {
